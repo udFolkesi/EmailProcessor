@@ -6,7 +6,7 @@ namespace EmailProcessor.Services
         public static List<string> Parse(string address)
         {
             return address.Split(';')
-                .Select(a => a.Trim())
+                .Select(a => a.Trim().ToLower())
                 .Where(a => !string.IsNullOrEmpty(a))
                 .ToList();
         }

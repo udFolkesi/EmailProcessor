@@ -9,8 +9,8 @@ namespace EmailProcessor
         {
             var email = new Email
             {
-                To = "s.sergeev@alfa.com",
-                Copy = "v.vladislavovich@alfa.com; m.mironov@company.com"
+                To = "t.kogni@acl.com; i.ivanov@tbank.ru",
+                Copy = "e.gras@tbank.ru; t.tbankovich@tbank.ru; v.veronickovna@tbank.ru"
             };
 
             var processed = EmailHandler.Process(email);

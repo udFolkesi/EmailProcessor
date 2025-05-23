@@ -62,5 +62,33 @@ namespace EmailProcessor.Tests
             Assert.Equal(email.To, result.To);
             Assert.Equal(email.Copy, result.Copy);
         }
+
+        [Fact]
+        public void Handles_Empty_Copy_Field_Correctly()
+        {
+            var email = new Email
+            {
+                To = "m.manager@vtb.ru",
+                Copy = ""
+            };
+
+            var result = EmailHandler.Process(email);
+
+            Assert.Contains("a.aleksandrov@vtb.ru", result.Copy);
+        }
+
+        [Fact]
+        public void Trims_And_Handles_Case_Insensitive()
+        {
+            var email = new Email
+            {
+                To = "   W.Petrov@alFa.Com   ",
+                Copy = "   f.Patit@buisness.com  "
+            };
+
+            var result = EmailHandler.Process(email);
+
+            Assert.Contains("v.vladislavovich@alfa.com", result.Copy);
+        }
     }
 }

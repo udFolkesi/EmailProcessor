@@ -14,26 +14,26 @@ namespace EmailProcessor.Services
 
             var domains = allAddresses.Select(a => EmailParser.GetDomain(a)).ToList();
 
-            List<string> updatedCopyList = copyList.ToList();
+            List<string> updatedCopyList = copyList;
 
             foreach (string domain in domains)
             {
                 if (EmailRules.SubstitutionAddresses.TryGetValue(domain, out var substitutions))
                 {
-                    if (EmailRules.ExcludedAddresses.TryGetValue(domain, out var excludedList)
-                        && excludedList != null
-                        && excludedList.Count > 0)
+                    if (EmailRules.ExcludedAddresses.TryGetValue(domain, out var excludedList))
                     {
-                        updatedCopyList.RemoveAll(e => substitutions.Contains(e));
-                    }
-                    else
-                    {
-                        foreach(string sub in substitutions)
+                        if (allAddresses.Any(addr => excludedList.Contains(addr)))
                         {
-                            if (!updatedCopyList.Contains(sub))
-                            {
-                                updatedCopyList.Add(sub);
-                            }
+                            updatedCopyList.RemoveAll(e => substitutions.Contains(e));
+                            continue;
+                        }
+                    }
+
+                    foreach (string sub in substitutions)
+                    {
+                        if (!updatedCopyList.Contains(sub))
+                        {
+                            updatedCopyList.Add(sub);
                         }
                     }
                 }
