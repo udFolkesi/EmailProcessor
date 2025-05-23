@@ -9,7 +9,7 @@ namespace EmailProcessor
         {
             var email = new Email
             {
-                To = "t.kogni@acl.com; i.ivanov@tbank.ru",
+                To = "t.kogniacl.com; i.ivanov@tbank.ru",
                 Copy = "e.gras@tbank.ru; t.tbankovich@tbank.ru; v.veronickovna@tbank.ru"
             };
 

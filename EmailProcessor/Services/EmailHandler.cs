@@ -41,7 +41,7 @@ namespace EmailProcessor.Services
 
             return new Email
             {
-                To = email.To,
+                To = string.Join("; ", toList),
                 Copy = string.Join("; ", updatedCopyList)
             };
         }
