@@ -8,7 +8,7 @@ namespace EmailProcessor.Services
             return address.Split(';')
                 .Select(a => a.Trim().ToLower())
                 .Where(a => !string.IsNullOrEmpty(a)) // если необходимо, можно заменить эту проверку на валидатор
-                 .ToList();                           // и тогда некорректные адреса просто не будут учитываться
+                .ToList();                            // и тогда некорректные адреса просто не будут учитываться
         }
 
         public static string GetDomain(string email)
